@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow</title>
+    <link rel="icon" href="https://img.icons8.com/?size=100&id=5jmZ3Yg9r0Db&format=png&color=000000">
+    <meta name="description" content="A beautiful, modern todo list with timer and stopwatch features">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="app-title">
+                    <span class="title-icon">✓</span>
+                    TaskFlow
+                </h1>
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+                    <span class="sun-icon">☀️</span>
+                    <span class="moon-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="tab-navigation">
+            <button class="tab-btn active" data-tab="tasks">
+                <span class="tab-icon">📝</span>
+                Tasks
+            </button>
+            <button class="tab-btn" data-tab="timer">
+                <span class="tab-icon">⏱️</span>
+                Timer
+            </button>
+            <button class="tab-btn" data-tab="stopwatch">
+                <span class="tab-icon">⏲️</span>
+                Stopwatch
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Tasks Tab -->
+            <section id="tasksTab" class="tab-content active">
+                <div class="task-input-container">
+                    <input 
+                        type="text" 
+                        id="taskInput" 
+                        class="task-input" 
+                        placeholder="What needs to be done?"
+                        aria-label="New task input"
+                    >
+                    <button id="addTaskBtn" class="add-task-btn">
+                        <span class="btn-icon">+</span>
+                        Add Task
+                    </button>
+                </div>
+
+                <div class="task-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Total</span>
+                        <span id="totalTasks" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Active</span>
+                        <span id="activeTasks" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Completed</span>
+                        <span id="completedTasks" class="stat-value">0</span>
+                    </div>
+                </div>
+
+                <div class="task-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="active">Active</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                </div>
+
+                <ul id="taskList" class="task-list"></ul>
+
+                <div id="emptyState" class="empty-state">
+                    <div class="empty-icon">📋</div>
+                    <p class="empty-text">No tasks yet. Add one to get started!</p>
+                </div>
+            </section>
+
+            <!-- Timer Tab -->
+            <section id="timerTab" class="tab-content">
+                <div class="timer-container">
+                    <div class="time-display-wrapper">
+                        <div id="timerDisplay" class="time-display">25:00</div>
+                        <div class="time-label">Minutes</div>
+                    </div>
+
+                    <div class="time-presets">
+                        <button class="preset-btn" data-minutes="5">5 min</button>
+                        <button class="preset-btn active" data-minutes="25">25 min</button>
+                        <button class="preset-btn" data-minutes="45">45 min</button>
+                        <button class="preset-btn" data-minutes="60">60 min</button>
+                    </div>
+
+                    <div class="custom-time-input">
+                        <input 
+                            type="number" 
+                            id="customMinutes" 
+                            class="time-input" 
+                            placeholder="Custom minutes"
+                            min="1"
+                            max="999"
+                        >
+                        <button id="setCustomTime" class="set-time-btn">Set Time</button>
+                    </div>
+
+                    <div class="timer-controls">
+                        <button id="timerStart" class="control-btn primary">
+                            <span class="btn-text">Start</span>
+                        </button>
+                        <button id="timerPause" class="control-btn secondary" disabled>
+                            <span class="btn-text">Pause</span>
+                        </button>
+                        <button id="timerReset" class="control-btn tertiary">
+                            <span class="btn-text">Reset</span>
+                        </button>
+                    </div>
+
+                    <div class="progress-ring">
+                        <svg class="progress-svg" width="300" height="300">
+                            <circle 
+                                class="progress-circle-bg" 
+                                cx="150" 
+                                cy="150" 
+                                r="140"
+                            ></circle>
+                            <circle 
+                                id="timerProgress"
+                                class="progress-circle" 
+                                cx="150" 
+                                cy="150" 
+                                r="140"
+                            ></circle>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stopwatch Tab -->
+            <section id="stopwatchTab" class="tab-content">
+                <div class="stopwatch-container">
+                    <div class="time-display-wrapper">
+                        <div id="stopwatchDisplay" class="time-display">00:00:00</div>
+                        <div class="time-label">Hours : Minutes : Seconds</div>
+                    </div>
+
+                    <div class="stopwatch-controls">
+                        <button id="stopwatchStart" class="control-btn primary">
+                            <span class="btn-text">Start</span>
+                        </button>
+                        <button id="stopwatchPause" class="control-btn secondary" disabled>
+                            <span class="btn-text">Pause</span>
+                        </button>
+                        <button id="stopwatchReset" class="control-btn tertiary">
+                            <span class="btn-text">Reset</span>
+                        </button>
+                        <button id="stopwatchLap" class="control-btn quaternary" disabled>
+                            <span class="btn-text">Lap</span>
+                        </button>
+                    </div>
+
+                    <div id="lapsList" class="laps-list"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
