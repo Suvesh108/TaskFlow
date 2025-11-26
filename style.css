@@ -811,9 +811,14 @@ body {
    RESPONSIVE DESIGN
    ========================================== */
 
+/* Tablet and Small Desktop (max-width: 768px) */
 @media (max-width: 768px) {
     .app-container {
         padding: var(--spacing-md);
+    }
+
+    .header-content {
+        padding: var(--spacing-md) var(--spacing-lg);
     }
 
     .app-title {
@@ -826,17 +831,31 @@ body {
         font-size: 1.25rem;
     }
 
+    /* Navigation - Keep labels visible but smaller */
+    .tab-navigation {
+        gap: var(--spacing-sm);
+    }
+
     .tab-btn {
         font-size: 0.875rem;
         padding: var(--spacing-sm) var(--spacing-md);
+        gap: var(--spacing-xs);
     }
 
     .tab-icon {
         font-size: 1rem;
     }
 
-    .time-display {
-        font-size: 3rem;
+    /* Task Section */
+    .task-input-container {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .add-task-btn {
+        width: 100%;
+        justify-content: center;
+        padding: var(--spacing-md);
     }
 
     .task-stats {
@@ -852,56 +871,331 @@ body {
         font-size: 1.5rem;
     }
 
-    .task-input-container {
-        flex-direction: column;
+    /* Timer/Stopwatch */
+    .timer-container,
+    .stopwatch-container {
+        padding: var(--spacing-lg);
     }
 
-    .add-task-btn {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .timer-controls,
-    .stopwatch-controls {
-        flex-direction: column;
-    }
-
-    .control-btn {
-        width: 100%;
+    .time-display {
+        font-size: 3rem;
     }
 
     .time-presets {
         flex-wrap: wrap;
+        gap: var(--spacing-xs);
+    }
+
+    .preset-btn {
+        flex: 1 1 calc(50% - var(--spacing-xs));
+        min-width: 80px;
     }
 
     .custom-time-input {
         flex-direction: column;
+        gap: var(--spacing-sm);
     }
 
     .time-input {
         width: 100%;
     }
+
+    .set-time-btn {
+        width: 100%;
+        padding: var(--spacing-md);
+    }
+
+    .timer-controls,
+    .stopwatch-controls {
+        gap: var(--spacing-sm);
+    }
+
+    .control-btn {
+        width: 100%;
+        min-width: auto;
+        padding: var(--spacing-md);
+    }
+
+    /* Progress Ring - Scale down */
+    .progress-ring {
+        opacity: 0.15;
+    }
+
+    .progress-svg {
+        width: 250px;
+        height: 250px;
+    }
+
+    .progress-circle-bg,
+    .progress-circle {
+        r: 115;
+        cx: 125;
+        cy: 125;
+    }
+
+    .progress-circle {
+        stroke-dasharray: 722;
+    }
+
+    /* Laps List */
+    .laps-list {
+        max-height: 250px;
+    }
 }
 
+/* Mobile Devices (max-width: 480px) */
 @media (max-width: 480px) {
+    .app-container {
+        padding: var(--spacing-sm) var(--spacing-xs);
+    }
+
     .header-content {
-        padding: var(--spacing-md);
+        padding: var(--spacing-sm) var(--spacing-md);
+        gap: var(--spacing-sm);
     }
 
     .app-title {
         font-size: 1.25rem;
+        gap: var(--spacing-xs);
+    }
+
+    .title-icon {
+        font-size: 1.75rem;
+    }
+
+    .theme-toggle {
+        width: 44px;
+        height: 44px;
+        font-size: 1.125rem;
+    }
+
+    /* Navigation - More compact */
+    .tab-navigation {
+        padding: 6px;
+        gap: 6px;
+    }
+
+    .tab-btn {
+        font-size: 0.75rem;
+        padding: 10px 8px;
+        flex-direction: column;
+        gap: 4px;
+        min-height: 44px;
+    }
+
+    .tab-icon {
+        font-size: 1.25rem;
+    }
+
+    /* Task Stats - 2 columns for better readability */
+    .task-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-xs);
+    }
+
+    .stat-item {
+        padding: var(--spacing-sm) var(--spacing-xs);
+    }
+
+    .stat-item:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
+    }
+
+    .stat-value {
+        font-size: 1.375rem;
+    }
+
+    /* Task Input */
+    .task-input {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 0.9375rem;
+    }
+
+    .add-task-btn {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 0.9375rem;
+    }
+
+    /* Task List */
+    .task-item {
+        padding: var(--spacing-md);
+        gap: var(--spacing-sm);
+    }
+
+    .task-text {
+        font-size: 0.9375rem;
+    }
+
+    /* Always show delete button on mobile */
+    .task-delete {
+        opacity: 0.6;
+    }
+
+    .task-item:hover .task-delete {
+        opacity: 1;
+    }
+
+    /* Filters - Stack on very small screens */
+    .task-filters {
+        gap: var(--spacing-xs);
+    }
+
+    .filter-btn {
+        font-size: 0.8125rem;
+        padding: var(--spacing-xs) var(--spacing-md);
+    }
+
+    /* Timer/Stopwatch */
+    .timer-container,
+    .stopwatch-container {
+        padding: var(--spacing-md);
+    }
+
+    .time-display {
+        font-size: 2.5rem;
+        margin-bottom: 4px;
+    }
+
+    .time-label {
+        font-size: 0.75rem;
+    }
+
+    .preset-btn {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 70px;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.8125rem;
+    }
+
+    .control-btn {
+        font-size: 0.9375rem;
+        padding: var(--spacing-sm) var(--spacing-md);
+        min-height: 44px;
+    }
+
+    /* Progress Ring - Hide on very small screens */
+    .progress-ring {
+        display: none;
+    }
+
+    /* Empty State */
+    .empty-icon {
+        font-size: 3rem;
+    }
+
+    .empty-text {
+        font-size: 1rem;
+    }
+}
+
+/* Extra Small Devices (max-width: 360px) */
+@media (max-width: 360px) {
+    .app-container {
+        padding: var(--spacing-xs);
+    }
+
+    .header-content {
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+
+    .app-title {
+        font-size: 1.125rem;
     }
 
     .title-icon {
         font-size: 1.5rem;
     }
 
-    .stat-label {
-        font-size: 0.75rem;
+    /* Extremely compact navigation */
+    .tab-btn {
+        font-size: 0.7rem;
+        padding: 8px 4px;
+    }
+
+    .tab-icon {
+        font-size: 1.125rem;
+    }
+
+    /* Stack stats vertically on very small screens */
+    .task-stats {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xs);
+    }
+
+    .stat-item:last-child {
+        grid-column: auto;
     }
 
     .stat-value {
         font-size: 1.25rem;
+    }
+
+    /* Time Display */
+    .time-display {
+        font-size: 2rem;
+    }
+
+    .time-label {
+        font-size: 0.6875rem;
+    }
+
+    /* Preset buttons - Full width pairs */
+    .time-presets {
+        gap: 6px;
+    }
+
+    .preset-btn {
+        flex: 1 1 calc(50% - 3px);
+        padding: 8px 6px;
+        font-size: 0.75rem;
+    }
+
+    /* Filters - Smaller text */
+    .filter-btn {
+        font-size: 0.75rem;
+        padding: 6px 10px;
+    }
+
+    /* Laps List */
+    .laps-list {
+        max-height: 200px;
+    }
+
+    .lap-item {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.875rem;
+    }
+}
+
+/* Landscape Mode Adjustments for Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .app-container {
+        padding: var(--spacing-xs) var(--spacing-md);
+    }
+
+    .app-header {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .tab-navigation {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .time-display {
+        font-size: 2rem;
+    }
+
+    .timer-container,
+    .stopwatch-container {
+        padding: var(--spacing-md);
+    }
+
+    .laps-list {
+        max-height: 150px;
     }
 }
 
